@@ -2,8 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../_models/post';
 import { PostService } from '../_services/post.service';
 import { Router } from '@angular/router';
-import { faHeart as fasHeart, faRetweet } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as fasHeart, faRetweet, faUserLarge } from '@fortawesome/free-solid-svg-icons';
 import { faHeart, faComment, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { UserLike } from '../_models/userLike';
 
 @Component({
   selector: 'app-post',
@@ -17,6 +18,7 @@ export class PostComponent implements OnInit {
   faHeart = faHeart;
   fasHeart = fasHeart;
   faTrashCan = faTrashCan;
+  likes: UserLike[] = [ ];
 
   @Input() post: Post = null!;
 
@@ -59,8 +61,26 @@ export class PostComponent implements OnInit {
   deletePost(event: MouseEvent, id: number){
     event.stopPropagation();
     this.postService.deletePost(id).subscribe(
-      res => {},
-      err => { alert(JSON.stringify(err));}
+      res => {
+
+      },
+      err => {
+         alert(JSON.stringify(err));}
     );
+  }
+
+  showLikes(postId: number) {
+    let ref = this;
+    this.postService.getUserLikes(postId).subscribe(
+      res => {
+        ref.likes = [...res];
+      }, 
+      err => {
+        alert(JSON.stringify(err));
+      });
+  }
+
+  showReposts(postId: number) {
+
   }
 }

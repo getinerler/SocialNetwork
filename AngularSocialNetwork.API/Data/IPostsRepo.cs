@@ -9,6 +9,7 @@ namespace AngularSocialNetwork.API.Data
         void SaveNewPost(PostAddDto postAddDto);
         PostLikeResultDto LikePost(PostLikeDto req);
         int RepostPost(PostLikeDto req);
+        List<LikedUserDto> GetLikedUsers(int postId);
         void DeletePost(int postId);
     }
 }

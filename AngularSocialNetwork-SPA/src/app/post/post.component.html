@@ -32,7 +32,7 @@
     <div class="post-counts-item">
       <span (click)="repostPost($event, post.id)" [ngClass]="{reposted:post.reposted}">
         <fa-icon [icon]="faReweet"></fa-icon>
-        {{post.retweetCount}}
+        &nbsp;<a class="count" (click)="showReposts(post.postId)">{{post.retweetCount}}</a>
       </span>
     </div>
 
@@ -40,7 +40,7 @@
       <span (click)="likePost($event, post.id)"  [ngClass]="{reposted:post.liked}">
         <fa-icon [icon]="faHeart" *ngIf="!post.liked"></fa-icon>
         <fa-icon [icon]="fasHeart" *ngIf="post.liked"></fa-icon>
-        {{post.likeCount}}
+        &nbsp;<a class="count" (click)="showLikes(post.postId)">{{post.likeCount}}</a>
       </span>
     </div>
   </div>
@@ -86,4 +86,11 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
+
+<div id="list-container" class="list-container" *ngIf="likes.length > 0">
+  <div class="list-container-element" *ngFor="let like of likes">
+    <img style="width: 20px;" src="{{like.photoPath}}">
+    <b>{{like.firstName}} {{like.lastName}}</b> (@{{like.username}})
+  </div>
+</div>

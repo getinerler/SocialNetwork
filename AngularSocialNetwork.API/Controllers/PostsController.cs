@@ -1,7 +1,6 @@
 using AngularSocialNetwork.API.Data;
 using AngularSocialNetwork.API.Dtos.Posts;
 using AngularSocialNetwork.API.Hubs;
-using AngularSocialNetwork.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -116,6 +115,24 @@ namespace AngularSocialNetwork.API.Controllers
             }
         }
 
+        [HttpGet("GetLikedUsers")]
+        public IActionResult GetLikedUsers(int? postId)
+        {
+            try
+            {
+                if (!postId.HasValue)
+                {
+                    throw new Exception("No post id");
+                }
+                List<LikedUserDto> likes = _postRepo.GetLikedUsers(postId.Value);
+                return Ok(likes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
         [HttpDelete]
         public IActionResult DeletePost(int? id)
         {

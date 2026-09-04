@@ -279,9 +279,23 @@ namespace AngularSocialNetwork.API.Data
         {
             List<Post> posts = _repo.GetPosts();
 
+            int likeCounter = 1;
+
             foreach (Post post in posts)
             {
                 List<Feed> feeds = _repo.GetPostFeeds(post.PostId);
+
+                List<Like> likes = new List<Like>();
+                foreach (Feed feed in feeds)
+                {
+                    likes.Add(new Like()
+                    {
+                        LikeId = likeCounter++,
+                        UserId = feed.UserId,
+                        PostId = post.PostId
+                    });
+                }
+                _repo.AddLikes(likes);
                 int likeCount = feeds.Where(x => x.Liked).Count();
                 post.LikeCount = likeCount;
             }
@@ -303,7 +317,7 @@ namespace AngularSocialNetwork.API.Data
                     UserId = user.UserId,
                     Text = "X liked your post.",
                     CreatedDate = DateTime.Now.AddDays(-1),
-                    IsRead = true,
+                    IsRead = false,
                 });
 
                 notifications.Add(new Notification()

@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environments.component';
 import { Post } from 'src/app/_models/post';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/_models/user';
+import { UserLike } from 'src/app/_models/userLike';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -50,6 +51,10 @@ export class PostService {
       feedId: id 
     };
     return this.http.post<number>(this.baseUrl + 'repostPost/', model);
+  }
+
+  getUserLikes(id: number): Observable<any> {
+    return this.http.get<UserLike>(this.baseUrl + 'getLikedUsers?postId=' + id);
   }
 
   deletePost(id: number): Observable<any> {

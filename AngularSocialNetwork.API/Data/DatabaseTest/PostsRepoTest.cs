@@ -266,6 +266,29 @@ namespace AngularSocialNetwork.API.Data.DatabaseTest
             return post.RetweetCount;
         }
 
+        public List<LikedUserDto> GetLikedUsers(int postId)
+        {
+            List<LikedUserDto> likedUsers =
+            (
+                from like in DatabaseContextTest.Likes
+                join user in DatabaseContextTest.Users on like.UserId equals user.UserId
+
+                where like.PostId == postId
+
+                select new LikedUserDto()
+                {
+                    UserId = user.UserId,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Username = user.Username,
+                    PhotoPath = UrlCreate.GetPhotoUrl(user.ProfilePhoto),
+                }
+             )
+            .ToList();
+
+            return likedUsers;
+        }
+
         public void DeletePost(int postId)
         {
             Post post = DatabaseContextTest.Posts.FirstOrDefault(x => x.PostId == postId);

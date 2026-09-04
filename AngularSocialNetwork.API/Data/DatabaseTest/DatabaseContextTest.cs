@@ -9,6 +9,7 @@ namespace AngularSocialNetwork.API.Data.DatabaseTest
         public static List<Conversation> Conversations { get; set; } = new List<Conversation>();
         public static List<Feed> Feeds { get; set; } = new List<Feed>();
         public static List<Follower> Followers { get; set; } = new List<Follower>();
+        public static List<Like> Likes { get; set; } = new List<Like>();
         public static List<Message> Messages { get; set; } = new List<Message>();
         public static List<Notification> Notifications { get; set; } = new List<Notification>();
         public static List<Post> Posts { get; set; } = new List<Post>();
