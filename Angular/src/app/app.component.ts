@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { faHome, faUser, faBell, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { User } from './_models/user';
+import { User } from '@shared/models/user';
 import { RealtimeService } from './_services/realtime.service';
 import { filter } from 'rxjs';
 

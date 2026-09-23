@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
-import { UserDetail } from '../_models/userDetail';
-import { Post } from '../_models/post';
+import { UserDetail } from '@shared/models/userDetail';
+import { Post } from '@shared/models/post';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../_models/user';
+import { User } from '@shared/models/user';
 
 @Component({
   selector: 'app-profile',

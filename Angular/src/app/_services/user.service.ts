@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Post } from 'src/app/_models/post';
-import { User } from 'src/app/_models/user';
-import { UserDetail } from 'src/app/_models/userDetail';
+import { Post } from '@shared/models/post';
+import { User } from '@shared/models/user';
+import { UserDetail } from '@shared/models/userDetail';
 import { environment } from 'src/environments/environments.component';
-import { Follower } from '../_models/follower';
+import { Follower } from '@shared/models/follower';
 
 @Injectable({
   providedIn: 'root'

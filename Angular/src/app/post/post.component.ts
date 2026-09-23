@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Post } from '../_models/post';
+import { Post } from '@shared/models/post';
 import { PostService } from '../_services/post.service';
 import { Router } from '@angular/router';
 import { faHeart as fasHeart, faRetweet, faUserLarge } from '@fortawesome/free-solid-svg-icons';
 import { faHeart, faComment, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { UserLike } from '../_models/userLike';
+import { UserLike } from '@shared/models/userLike';
 
 @Component({
   selector: 'app-post',

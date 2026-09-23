@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environments.component';
-import { Post } from 'src/app/_models/post';
+import { Post } from '@shared/models/post';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/_models/user';
-import { UserLike } from 'src/app/_models/userLike';
+import { User } from '@shared/models/user';
+import { UserLike } from '@shared/models/userLike';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
