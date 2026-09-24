@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import PostCard from "../components/post";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -26,9 +26,8 @@ export default function Home() {
 
       <div className="posts-container">
         {posts.map((post: any) => (
-          <div className="post" key={post.id}>{post.content}
-          Yabadabaduuu
-          </div>
+          <PostCard key={post.id} post={post} likes={post.likes ?? []} />
+
         ))}
       </div>
     </>
