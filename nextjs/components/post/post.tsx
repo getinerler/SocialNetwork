@@ -2,23 +2,23 @@ import { Post } from '@shared/models/Post';
 import { UserLike } from '@shared/models/userLike';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRetweet, faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
+import styles from './post.module.css';
 
 export default function PostCard({ post, likes }: { post: Post; likes: UserLike[] }) {
   return (
     <>
-    <div className="post" onClick={() => getDetail(post.userId)}>
-        (post.isReposted && <div className="repost-div">
+    <div className={styles.post} onClick={() => getDetail(post.userId)}>
+    {post.isReposted && <div className={styles.repostDiv}>
             <FontAwesomeIcon icon={faRetweet} />
             by {post.repostedFirstName} {post.repostedLastName}
-        </div>)
+        </div>}
 
-        <div className="post-header">
+        <div className={styles.postHeader}>
             <div style={{ display: "flex" }}>
-            <a onClick={() => getProfile(event, post.userId)}><img src="{{post.photo}}" alt="Profile Picture"/></a>
+            <a onClick={() => getProfile(event, post.userId)}><img src={post.photo} className={styles.postHeaderImg} alt="Profile Picture"/></a>
             <h4>{post.firstName} {post.lastName}
                 <span style={{ fontSize: "18px", color: "grey" }}>@{post.username}</span>
-                <span style={{ fontSize: "16px", color: "grey" }}>&nbsp;&nbsp;{post.date.toString()}</span>
-                
+                <span style={{ fontSize: "16px", color: "grey" }}>&nbsp;&nbsp;{(() => { const date = new Date(post.date); return `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${date.getFullYear()}`; })()}</span>         
             </h4>
             </div>
             <div onClick={() => deletePost(post.postId)}>
@@ -26,30 +26,30 @@ export default function PostCard({ post, likes }: { post: Post; likes: UserLike[
             </div>
         </div>
 
-        <div className="post-content">
+        <div className={styles.postContent}>
             <p>{post.text}</p>
         </div>
-        <div className="post-counts">
-
-            <div className="post-counts-item">
-            <span>
-                <FontAwesomeIcon icon={faComment} />
-                {post.commentCount}
-            </span>
+        
+        <div className={styles.postCounts}>
+            <div className={styles.postCountsItem}>
+                <span>
+                    <FontAwesomeIcon icon={faComment} />
+                    {post.commentCount}
+                </span>
             </div>
 
-            <div className="post-counts-item">
-            <span onClick={() => repostPost(post.postId)} className={post.reposted ? "reposted" : ""}>
-                <FontAwesomeIcon icon={faRetweet} />
-                &nbsp;<a className="count" onClick={() => showReposts(post.postId)}>{post.retweetCount}</a>
-            </span>
+            <div className={styles.postCountsItem}>
+                <span onClick={() => repostPost(post.postId)} className={post.reposted ? styles.reposted : ""}>
+                    <FontAwesomeIcon icon={faRetweet} />
+                    &nbsp;<a className={styles.count} onClick={() => showReposts(post.postId)}>{post.retweetCount}</a>
+                </span>
             </div>
 
-            <div className="post-counts-item">
-            <span onClick={() => likePost(post.postId)}  className="{reposted:post.liked}">
-                {post.liked ? <FontAwesomeIcon icon={faHeart} /> : ""}
-                &nbsp;<a className="count" onClick={()=>showLikes(post.postId)}>{post.likeCount}</a>
-            </span>
+            <div className={styles.postCountsItem}>
+                <span onClick={() => likePost(post.postId)}  className={post.liked ? styles.liked : ""}>
+                    {post.liked ? <FontAwesomeIcon icon={faHeart} /> : ""}
+                    &nbsp;<a className={styles.count} onClick={()=>showLikes(post.postId)}>{post.likeCount}</a>
+                </span>
             </div>
         </div>
 
@@ -57,8 +57,8 @@ export default function PostCard({ post, likes }: { post: Post; likes: UserLike[
             <div>
 
             {post.comments.map((comment, index) => (
-                <div className="comment">
-                    <div className="comment-header">
+                <div className={styles.comment}>
+                    <div className={styles.commentHeader}>
                         <img src="{{comment.photo}}" alt="Profile Picture"/>
 
                         <div>
@@ -67,27 +67,27 @@ export default function PostCard({ post, likes }: { post: Post; likes: UserLike[
                         </div>
                     </div>
 
-                    <div className="comment-content">
+                    <div className={styles.commentContent}>
                         <p>{comment.text}</p>
                     </div>
-                    <div className="comment-counts">
+                    <div className={styles.commentCounts}>
 
-                        <div className="post-counts-item">
+                        <div className={styles.postCountsItem}>
                         <span onClick={() => getDetail(post.postId)}>
                             <FontAwesomeIcon icon={faComment} />
                             {post.commentCount}
                         </span>
                         </div>
 
-                        <div className="post-counts-item">
-                        <span onClick={() => repostPost(post.postId)} className={post.reposted ? "reposted" : ""}>
+                        <div className={styles.postCountsItem}>
+                        <span onClick={() => repostPost(post.postId)} className={post.reposted ? styles.reposted : ""}>
                             <FontAwesomeIcon icon={faRetweet} />
                             {post.retweetCount}
                         </span>
                         </div>
                     
-                        <div className="post-counts-item">
-                        <span onClick={() => likePost(post.postId)} className={post.liked ? "liked" : ""}>
+                        <div className={styles.postCountsItem}>
+                        <span onClick={() => likePost(post.postId)} className={post.liked ? styles.liked : ""}>
                             {post.liked ? <FontAwesomeIcon icon={faHeart} /> : <FontAwesomeIcon icon={faHeart} />}
                             {post.likeCount}
                         </span>
@@ -101,9 +101,9 @@ export default function PostCard({ post, likes }: { post: Post; likes: UserLike[
         </div>
 
         {likes.length > 0 && (
-            <div id="list-container" className="list-container">
+            <div id="list-container" className={styles.listContainer}>
                 {likes.map((like, index) => (
-                    <div className="list-container-element">
+                    <div className={styles.listContainerElement}>
                         <img style={{ width: "20px" }} src="{{like.photoPath}}" />
                         <b>{like.firstName} {like.lastName}</b> (@{like.username})
                     </div>

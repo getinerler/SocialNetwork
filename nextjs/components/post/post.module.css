@@ -1,0 +1,118 @@
+.post {
+    border-bottom: 0.5px solid rgb(235, 220, 220);
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor:pointer;
+    font-size: 18px;
+}
+
+.post:hover{
+    background-color: rgb(243, 243, 243);
+}
+
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.postHeader img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.postContent {
+    margin-top: 10px;
+}
+
+.postCounts {
+    display: flex;
+    height: 20px;
+    margin-top: 20px;
+}
+
+.postCountsItem {
+    width: 55px;
+    height: 20px;
+    display: flex;
+    margin-right: 20px;
+}
+
+fa-icon:hover {
+    color:red;
+}
+
+.count:hover {
+    color:red;
+}
+
+.comment {
+    border-bottom: 1px solid rgb(235, 220, 220);
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 75%;
+}
+
+.commentHeader {
+    display: flex;
+    align-items: center;
+}
+
+.commentHeader img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.commentContent {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.commentCounts {
+    display: flex;
+    height: 20px;
+    margin-top: 20px;
+}
+
+.commentCountsItem {
+    width: 55px;
+    height: 20px;
+    display: flex;
+    margin-right: 20px;
+}
+
+.repost-div {
+    font-size: 9px;
+    color: grey;
+}
+
+.reposted {
+    color: darkred;
+}
+
+.listContainer {
+    padding: 20px;
+    border: 1px solid black;
+    width:500px;
+    min-height: 100px;
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.listContainer img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.listContainerElement {
+    margin-bottom: 10px;
+}

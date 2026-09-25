@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import PostCard from "../components/post";
+import PostCard from "../components/post/post";
+import "./globals.css";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -15,19 +16,18 @@ export default function Home() {
 
   return (
     <>
-      <div className="new-post">
-        <div className="new-post-header">
-          <img className="new-post-img" src="{{profilePhotoUrl}}" alt="Profile Picture"/>
-          <input type="text" className="new-post-send-input" placeholder="Write something..." />
+      <div className="newPost">
+        <div className="newPostHeader">
+          <img className="newPostImg" src="{{profilePhotoUrl}}" alt="Profile Picture"/>
+          <input type="text" className="newPostSendInput" placeholder="Write something..." />
 
         </div>
-        <button className="new-post-send-button">Submit</button>
+        <button className="newPostSendButton">Submit</button>
       </div>
 
-      <div className="posts-container">
+      <div className="postsContainer">
         {posts.map((post: any) => (
           <PostCard key={post.id} post={post} likes={post.likes ?? []} />
-
         ))}
       </div>
     </>
