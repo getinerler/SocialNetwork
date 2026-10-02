@@ -2,18 +2,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faHome, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/dist/client/link';
+import { isLoggedIn, logout } from "@/lib/auth";
 
 export default function Nav({ id, notificationCount }: { id: number; notificationCount: number }) {
   return (
     <>
-        {showNav() && <div className="navContainer">
-        {!loggedIn() && <nav>
+        <div className="navContainer">
+        {!isLoggedIn() && <nav>
             <Link href="/login">Log In</Link>
         </nav>}
-        {loggedIn() && <nav>
+        {isLoggedIn() && <nav>
             <ul>
             <li>
-                <Link href="/home" className="nav-link">Log In
+                <Link href="/home" className="nav-link">
                     <span className="icon"> <FontAwesomeIcon icon={faHome}/> </span>
                     <span className="text">Home</span>
                 </Link>
@@ -43,21 +44,13 @@ export default function Nav({ id, notificationCount }: { id: number; notificatio
             </li>
             </ul>
         </nav>}
-        </div>}
+        </div>
     </>
 );
 
-function logout() {
-    
-}
-
 function showNav() {    
     return true;
-
-}
-
-function loggedIn() {    
-    return false;
+    return location.pathname.indexOf('/login') === -1;
 }
 
 }

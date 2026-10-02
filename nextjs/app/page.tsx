@@ -3,10 +3,16 @@
 import { useEffect, useState } from "react";
 import PostCard from "../components/post/post";
 import "./globals.css";
+import { getUser } from "../lib/auth";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
-
+  let profilePhotoUrl;
+  const user = getUser();
+  console.log(user);
+  if (user && user.photo) {
+    profilePhotoUrl = user.photo;
+  }
   useEffect(() => {
     fetch("http://localhost:5253/api/posts")
       .then((response) => response.json())
@@ -18,7 +24,7 @@ export default function Home() {
     <>
       <div className="newPost">
         <div className="newPostHeader">
-          <img className="newPostImg" src="{{profilePhotoUrl}}" alt="Profile Picture"/>
+          <img className="newPostImg" src={profilePhotoUrl} alt="Profile Picture"/>
           <input type="text" className="newPostSendInput" placeholder="Write something..." />
 
         </div>

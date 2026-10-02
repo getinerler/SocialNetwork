@@ -1,0 +1,53 @@
+.formBody {
+    font-family: Arial, sans-serif;
+    background-color: #fff4f4;
+}
+
+.loginContainer {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    backdrop-filter: blur(10px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formh2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: darkred;
+}
+
+.formInput {
+    display: block;
+    width: 100%;
+    height:30px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.formButton {
+    width: 100%;
+    height: 30px;
+    background-color: darkred;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.formButton:hover {
+    background-color: darkred;
+}
+
+.errorMessage {
+    color: red;
+}
