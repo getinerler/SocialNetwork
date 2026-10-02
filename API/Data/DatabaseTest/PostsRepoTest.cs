@@ -8,41 +8,78 @@ namespace API.Data.DatabaseTest
     {
         public List<PostForFeedDto> GetPosts(int userId)
         {
+            //TODO: Implement the logic to retrieve posts based on the userId.
+            if (userId == -1)
+            {
+                List<PostForFeedDto> commonList =
+                (
+                    from post in DatabaseContextTest.Posts 
+                    join user in DatabaseContextTest.Users on post.UserId equals user.UserId
+
+                    orderby post.CreatedDate descending
+
+                    select new PostForFeedDto()
+                    {
+                        Id = -1,
+                        PostId = post.PostId,
+                        UserId = post.UserId,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Username = user.Username,
+                        Text = post.Text,
+                        Photo = UrlCreate.GetPhotoUrl(user.ProfilePhoto),
+                        LikeCount = post.LikeCount,
+                        RetweetCount = post.RetweetCount,
+                        CommentCount = post.CommentCount,
+                        IsReposted = false,
+                        RepostedFirstName = string.Empty,
+                        RepostedLastName = string.Empty,
+                        Date = post.CreatedDate,
+                        Liked = false,
+                        Reposted = false
+                    })
+                .Skip(0)
+                .Take(10)
+                .ToList();
+
+                return commonList;
+            }
+
             List<PostForFeedDto> list =
-            (
-                from feed in DatabaseContextTest.Feeds
-                join post in DatabaseContextTest.Posts on feed.PostId equals post.PostId
-                join user in DatabaseContextTest.Users on post.UserId equals user.UserId
-                join repostUser in DatabaseContextTest.Users on feed.RepostedUserId equals repostUser.UserId into rue
-                from repostUser in rue.DefaultIfEmpty()
+                (
+                    from feed in DatabaseContextTest.Feeds
+                    join post in DatabaseContextTest.Posts on feed.PostId equals post.PostId
+                    join user in DatabaseContextTest.Users on post.UserId equals user.UserId
+                    join repostUser in DatabaseContextTest.Users on feed.RepostedUserId equals repostUser.UserId into rue
+                    from repostUser in rue.DefaultIfEmpty()
 
-                where userId == -1 || feed.UserId == userId
+                    where userId == -1 || feed.UserId == userId
 
-                orderby post.CreatedDate descending
+                    orderby post.CreatedDate descending
 
-                select new PostForFeedDto()
-                {
-                    Id = feed.FeedId,
-                    PostId = feed.PostId,
-                    UserId = post.UserId,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Username = user.Username,
-                    Text = post.Text,
-                    Photo = UrlCreate.GetPhotoUrl(user.ProfilePhoto),
-                    LikeCount = post.LikeCount,
-                    RetweetCount = post.RetweetCount,
-                    CommentCount = post.CommentCount,
-                    IsReposted = repostUser != null,
-                    RepostedFirstName = repostUser?.FirstName ?? string.Empty,
-                    RepostedLastName = repostUser?.LastName ?? string.Empty,
-                    Date = post.CreatedDate,
-                    Liked = feed.Liked,
-                    Reposted = feed.Reposted
-                })
-              .Skip(0)
-              .Take(10)
-              .ToList();
+                    select new PostForFeedDto()
+                    {
+                        Id = feed.FeedId,
+                        PostId = feed.PostId,
+                        UserId = post.UserId,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Username = user.Username,
+                        Text = post.Text,
+                        Photo = UrlCreate.GetPhotoUrl(user.ProfilePhoto),
+                        LikeCount = post.LikeCount,
+                        RetweetCount = post.RetweetCount,
+                        CommentCount = post.CommentCount,
+                        IsReposted = repostUser != null,
+                        RepostedFirstName = repostUser?.FirstName ?? string.Empty,
+                        RepostedLastName = repostUser?.LastName ?? string.Empty,
+                        Date = post.CreatedDate,
+                        Liked = feed.Liked,
+                        Reposted = feed.Reposted
+                    })
+                .Skip(0)
+                .Take(50)
+                .ToList();
 
             return list;
         }

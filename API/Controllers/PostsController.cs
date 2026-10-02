@@ -22,11 +22,6 @@ namespace API.Controllers
         [HttpGet]
         public IEnumerable<PostForFeedDto> Get(int? userId)
         {
-            if (!userId.HasValue)
-            {
-                Console.WriteLine("Common feed.");
-            }
-
             return _postRepo.GetPosts(userId ?? -1);
         }
 

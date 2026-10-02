@@ -47,7 +47,7 @@ export default function PostCard({ post, likes }: { post: Post; likes: UserLike[
 
             <div className={styles.postCountsItem}>
                 <span onClick={() => likePost(post.postId)}  className={post.liked ? styles.liked : ""}>
-                    {post.liked ? <FontAwesomeIcon icon={faHeart} /> : ""}
+                    <FontAwesomeIcon icon={faHeart} />
                     &nbsp;<a className={styles.count} onClick={()=>showLikes(post.postId)}>{post.likeCount}</a>
                 </span>
             </div>

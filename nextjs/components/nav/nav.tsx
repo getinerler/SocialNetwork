@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faHome, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/dist/client/link';
-import { isLoggedIn, logout } from "@/lib/auth";
+import { isLoggedIn, logout as authLogout } from "@/lib/auth";
 
 export default function Nav({ id, notificationCount }: { id: number; notificationCount: number }) {
   return (
@@ -51,6 +51,11 @@ export default function Nav({ id, notificationCount }: { id: number; notificatio
 function showNav() {    
     return true;
     return location.pathname.indexOf('/login') === -1;
+}
+
+function logout() {
+    authLogout();
+    window.location.href = "/";
 }
 
 }
